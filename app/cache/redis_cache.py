@@ -1,15 +1,11 @@
-import os
-import redis
-from dotenv import load_dotenv
+import json 
+import redis 
+from app.core.config import settings
 
-load_dotenv()
-
-REDIS_URL = os.getenv("REDIS_URL")
-
-redis_client = redis.StrictRedis.from_url(REDIS_URL, decode_responses=True)
+redis_client=redis.Redis.from_url(settings.REDIS_URL)
 
 
-def get_cached_prediction(key: str):
+def get_sached_prediction(key: str):
     value = redis_client.get(key)
     return eval(value) if value else None
 
