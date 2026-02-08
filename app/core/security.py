@@ -11,7 +11,7 @@ def create_token(data :dict ,expire_minutes=30):
 
 def verify_token(token:str):
     try: 
-        payload=jwt.decode(token,settings.JWT_SECRET_KEY,algorithms=settings.JWT_ALGORITHM)
+        payload=jwt.decode(token,settings.JWT_SECRET_KEY,algorithms=[settings.JWT_ALGORITHM])
         return payload
     except JWTError:
         return None
